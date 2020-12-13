@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#ws folder
+.idea
+
+#react-eject
+/config
+/scripts

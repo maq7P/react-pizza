@@ -2,7 +2,6 @@ import React from 'react'
 import { Categories, Sort, PizzaBlock } from '../components'
 
 export default function Home({items}) {
-    console.log(items);
     return (
         <div className="container">
             <div className="content__top">
@@ -15,7 +14,7 @@ export default function Home({items}) {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {items.map(item => (
+                {items && items.map(item => (
                     <PizzaBlock
                         key={item.id}
                         {...item}

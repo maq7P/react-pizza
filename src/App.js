@@ -7,8 +7,11 @@ import {
     Header
 } from './components'
 import { Home } from './pages';
+import {store} from "./redux/store";
+import {set_data} from "./redux/actionCreators/data";
+import {connect} from "react-redux";
 
-function App() {
+function App(props) {
     const [data, setData] = React.useState([])
 
     React.useEffect(() => {
@@ -18,8 +21,6 @@ function App() {
                 setData(data.pizzas)
             })
     }, [])
-
-    console.log(data);
     return (
         <div className="wrapper">
             <Header logo={logoSvg}/>
@@ -27,7 +28,7 @@ function App() {
                 <Router>
                     <Route exact path='/' render={() => <Home items={data}/>}/>
                 </Router>
-            </div> 
+            </div>
         </div>
     );
 }

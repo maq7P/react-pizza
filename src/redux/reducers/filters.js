@@ -1,8 +1,8 @@
 import {SET_CATEGORY, SET_SORT_BY} from "../constants";
 
 const initialState = {
-    sortBy: '',
-    category: ''
+    sortBy: 0,
+    category: null
 }
 export const filterReducer = (state = initialState, action) => {
     switch (action.type) {

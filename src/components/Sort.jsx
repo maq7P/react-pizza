@@ -1,11 +1,10 @@
 import React, {useEffect, useState, useRef} from 'react'
 
-export default function Sort({list}) {
+function Sort({list, sortBy, onClickItem}) {
     const [visiblePopup, setVisiblePopup] = useState(false)
-    const [activeItem, setActiveItem] = useState(0)
 
     const changeActive = index => {
-        setActiveItem(index)
+        onClickItem(index)
         togglePopup()
     }
 
@@ -46,19 +45,25 @@ export default function Sort({list}) {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={togglePopup}>{list[activeItem]}</span>
+                <span onClick={togglePopup}>{list[sortBy].name}</span>
             </div>
+            {/*[*/}
+            {/*{name: 'популярности', type: 'popular'},*/}
+            {/*{name: 'цене', type: 'price'},*/}
+            {/*{name: 'алфавиту', type: 'title'}*/}
+            {/*]*/}
             {visiblePopup && <div className="sort__popup">
                 <ul>
-                    {list && list.map((name, i) => (
+                    {list && list.map((obj, i) => (
                         <li 
-                            key={`${name}_${i}`}
-                            className={activeItem === i ? 'active' : ''}
+                            key={`${obj.name}_${i}`}
+                            className={sortBy === i ? 'active' : ''}
                             onClick={() => changeActive(i)}
-                        >{name}</li>
+                        >{obj.name}</li>
                     ))}
                 </ul>
             </div>}
         </div>
     )
 }
+export default React.memo(Sort)

@@ -5,9 +5,14 @@ import PropTypes from 'prop-types'
 const Button = ({
         children,
         className,
-        outline
+        outline, onClickToBtnCart
     }) => (
         <button
+            onClick={
+                onClickToBtnCart
+                    ? () => {onClickToBtnCart()}
+                    : null
+            }
             href="/cart.html" 
             className = {
                 classNames('button', className,
@@ -19,7 +24,7 @@ const Button = ({
         >  {children}
         </button>
     )
-// Button.propTypes = {
-//     onClick: PropTypes.func,
-// }
+Button.propTypes = {
+    className: PropTypes.string.isRequired,
+}
 export default Button

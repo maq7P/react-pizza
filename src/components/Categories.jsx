@@ -1,6 +1,6 @@
 import React from 'react'
+import PropTypes from "prop-types";
 const Categories = ({list, onClickItem, category}) => {
-    console.log(category)
     const changeActive = index => {
         onClickItem(index)
     }
@@ -23,5 +23,10 @@ const Categories = ({list, onClickItem, category}) => {
             </ul>
         </div>
     )
+}
+Categories.propTypes = {
+    list: PropTypes.arrayOf(PropTypes.string.isRequired),
+    onClickItem: PropTypes.func,
+    category: PropTypes.number
 }
 export default React.memo(Categories)

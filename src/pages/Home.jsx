@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {set_category, set_sort_by} from "../redux/actions/filters";
 import {fetchData} from "../redux/actions/data";
 import PizzaLoading from "../components/PizzaBlock/PizzaLoading";
+import {add_data_to_cart} from "../redux/actions/cart";
 
 const categoriesName = ['Мясные','Вегетарианская','Гриль','Острые','Закрытые']
 const sortItems = [
@@ -15,7 +16,11 @@ const sortItems = [
 export default function Home() {
     const dispatch = useDispatch()
     const data = useSelector(({ data }) => data)
-    const filter  = useSelector(({ filter }) => filter)
+
+    const filter  = useSelector(({ filter }) => ({
+        category: filter.category,
+        sortBy: filter.sortBy
+    }))
 
     React.useEffect(() => {
         dispatch(fetchData(filter.category, sortItems[filter.sortBy]))
@@ -29,6 +34,13 @@ export default function Home() {
         dispatch(set_sort_by(name))
     }, [filter.sortBy])
 
+    const cart = useSelector(({ cart }) => cart)
+
+    const onClickToBtnCart = (dataInfo) => {
+        dispatch(add_data_to_cart(dataInfo))
+    }
+
+
 
     return (
         <div className="container">
@@ -40,7 +52,7 @@ export default function Home() {
                 />
                 <Sort
                     sortBy={filter.sortBy}
-                    list={sortItems}
+                    sortItems={sortItems}
                     onClickItem={onSelectedSort}
                 />
             </div>
@@ -49,7 +61,9 @@ export default function Home() {
                 {data.isLoaded
                     ? data.items.map(item => (
                         <PizzaBlock
+                            onClickToBtnCart={onClickToBtnCart}
                             key={item.id}
+                            dataCartId={cart.items[item.id] && cart.items[item.id].length}
                             {...item}
                         />
                     ))

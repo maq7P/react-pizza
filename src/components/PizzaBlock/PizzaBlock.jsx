@@ -1,17 +1,27 @@
 import React, {useState} from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import Button from "../Button";
 
-function PizzaBlock({name, imageUrl, price, sizes, types}) {
+function PizzaBlock({id, name, imageUrl, price, sizes, types, onClickToBtnCart, dataCartId}) {
     const typesName = ['тонкое', 'традиционное']
-    const aviableSize = [26, 30, 40]
+    const availableSize = [26, 30, 40]
+
     const [activeType, setActiveType] = useState(typesName[types[0]])
     const [sizeValue, setSizeValue] = useState(sizes[0])
+
     const changeActiveType = name => {
         setActiveType(name)
     }
     const changeActiveSize = name => {
         setSizeValue(name)
+    }
+    const onClickBtn = () => {
+        onClickToBtnCart({
+            id, name, imageUrl, price,
+            type: activeType,
+            size: sizeValue
+        })
     }
 
     return (
@@ -36,7 +46,7 @@ function PizzaBlock({name, imageUrl, price, sizes, types}) {
                     ))}
                 </ul>
                 <ul>
-                    {aviableSize.map((size, index) => (
+                    {availableSize.map((size, index) => (
                         <li
                             key={`${size}_${index}`}
                             className={classNames({
@@ -50,7 +60,11 @@ function PizzaBlock({name, imageUrl, price, sizes, types}) {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <Button
+                    onClickToBtnCart={onClickBtn}
+                    className="button button--outline button--add"
+
+                >
                     <svg
                         width="12"
                         height="12"
@@ -63,14 +77,13 @@ function PizzaBlock({name, imageUrl, price, sizes, types}) {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
-                </div>
+                    {dataCartId ? <i>{dataCartId}</i> : ''}
+                </Button>
             </div>
         </div>
     )
 }
 PizzaBlock.propTypes = {
-    // name, imageUrl, price, sizes, types
     name: PropTypes.string,
     imageUrl: PropTypes.string,
     price: PropTypes.number,

@@ -2,7 +2,7 @@ import {DATA_LOADED, SET_DATA} from "../constants";
 
 export const fetchData = (category, sortBy= {}) => (dispatch) => {
     dispatch(data_loaded(false))
-    fetch(`http://localhost:3001/pizzas?${category!==null ? `category=${category}` : ''}&_sort=${sortBy.type}&_order=${sortBy.order}`)
+    fetch(`/pizzas?${category!==null ? `category=${category}` : ''}&_sort=${sortBy.type}&_order=${sortBy.order}`)
         .then(response => response.json())
         .then(data => {
             dispatch(set_data(data))

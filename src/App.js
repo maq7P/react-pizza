@@ -6,18 +6,19 @@ import logoSvg from './assets/img/pizza-logo.svg';
 import {
     Header
 } from './components'
-import { Home } from './pages';
+import { Home, Cart } from './pages';
 
 function App() {
     return (
-        <div className="wrapper">
-            <Header logo={logoSvg}/>
-            <div className="content">
-                <Router>
-                    <Route exact path='/' component={Home}/>
-                </Router>
+        <Router>
+            <div className="wrapper">
+                <Header logo={logoSvg}/>
+                <div className="content">
+                        <Route exact path='/' component={Home}/>
+                        <Route exact path='/cart' component={Cart}/>
+                </div>
             </div>
-        </div>
+        </Router>
     );
 }
 export default App;

@@ -1,6 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react'
+import PropTypes from "prop-types";
+import PizzaBlock from "./PizzaBlock/PizzaBlock";
 
-function Sort({list, sortBy, onClickItem}) {
+function Sort({sortItems, sortBy, onClickItem}) {
     const [visiblePopup, setVisiblePopup] = useState(false)
 
     const changeActive = index => {
@@ -15,7 +17,8 @@ function Sort({list, sortBy, onClickItem}) {
     const sortRef = useRef();
 
     const handleOutsideClick = e => {
-        if(!e.path.includes(sortRef.current)){
+        const path = e.path || (e.composedPath && e.composedPath());
+        if(!path.includes(sortRef.current)){
             togglePopup()
         }
     }
@@ -45,25 +48,29 @@ function Sort({list, sortBy, onClickItem}) {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={togglePopup}>{list[sortBy].name}</span>
+                <span onClick={togglePopup}>{sortItems[sortBy].name}</span>
             </div>
-            {/*[*/}
-            {/*{name: 'популярности', type: 'popular'},*/}
-            {/*{name: 'цене', type: 'price'},*/}
-            {/*{name: 'алфавиту', type: 'title'}*/}
-            {/*]*/}
             {visiblePopup && <div className="sort__popup">
                 <ul>
-                    {list && list.map((obj, i) => (
+                    {sortItems && sortItems.map((item, i) => (
                         <li 
-                            key={`${obj.name}_${i}`}
+                            key={`${item.name}_${i}`}
                             className={sortBy === i ? 'active' : ''}
                             onClick={() => changeActive(i)}
-                        >{obj.name}</li>
+                        >{item.name}</li>
                     ))}
                 </ul>
             </div>}
         </div>
     )
+}
+Sort.propTypes = {
+    sortItems: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
+    sortBy: PropTypes.number.isRequired,
+    onClickItem: PropTypes.func
+}
+Sort.defaultProps = {
+    sortBy: -1,
+    sortItems: {},
 }
 export default React.memo(Sort)

@@ -4,7 +4,7 @@ import ContentLoader from "react-content-loader"
 const MyLoader = () => (
     <ContentLoader
         className='pizza-block'
-        speed={12}
+        speed={1}
         width={280}
         height={456}
         viewBox="0 0 280 456"

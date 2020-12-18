@@ -3,12 +3,28 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import Button from "../Button";
 
-function PizzaBlock({id, name, imageUrl, price, sizes, types, onClickToBtnCart, dataCartId}) {
+function PizzaBlock({
+                        id, name, imageUrl,
+                        price, priceType, priceSize30, priceSize40,
+                        sizes, types, onClickToBtnCart, dataCartId}) {
     const typesName = ['тонкое', 'традиционное']
     const availableSize = [26, 30, 40]
 
     const [activeType, setActiveType] = useState(typesName[types[0]])
     const [sizeValue, setSizeValue] = useState(sizes[0])
+
+    let totalPrice = price
+    if (activeType === 'традиционное'){
+        totalPrice += priceType
+    }
+    if (sizeValue === 30){
+        totalPrice += priceSize30
+    }
+    if (sizeValue === 40){
+        totalPrice += priceSize40
+    }
+
+
 
     const changeActiveType = name => {
         setActiveType(name)
@@ -18,7 +34,8 @@ function PizzaBlock({id, name, imageUrl, price, sizes, types, onClickToBtnCart, 
     }
     const onClickBtn = () => {
         onClickToBtnCart({
-            id, name, imageUrl, price,
+            id, name, imageUrl,
+            price: totalPrice,
             type: activeType,
             size: sizeValue
         })
@@ -59,11 +76,12 @@ function PizzaBlock({id, name, imageUrl, price, sizes, types, onClickToBtnCart, 
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от {price} ₽</div>
+                <div className="pizza-block__price">{totalPrice} ₽</div>
                 <Button
-                    onClickToBtnCart={onClickBtn}
-                    className="button button--outline button--add"
-
+                    onClickToBtn={onClickBtn}
+                    className="button--add"
+                    btn
+                    outline
                 >
                     <svg
                         width="12"
@@ -97,4 +115,4 @@ PizzaBlock.defaultProps = {
     types: [],
 }
 
-export default PizzaBlock
+export default React.memo(PizzaBlock)

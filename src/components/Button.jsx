@@ -2,21 +2,23 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-const Button = ({
+const Button = ({btn=false,
         children,
-        className,
-        outline, onClickToBtnCart
+        className = '',
+        outline, onClickToBtn
     }) => (
         <button
             onClick={
-                onClickToBtnCart
-                    ? () => {onClickToBtnCart()}
+                onClickToBtn
+                    ? () => {onClickToBtn()}
                     : null
             }
             href="/cart.html" 
             className = {
-                classNames('button', className,
+                classNames(className,
                 {
+                    'btnEmpty': ! btn,
+                    'button': btn,
                     'button--outline': outline
                 }
                 )

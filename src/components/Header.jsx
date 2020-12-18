@@ -5,11 +5,7 @@ import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
 
 const Header = ({logo}) => {
-    const {totalCount, totalPrice} = useSelector(({cart}) => ({
-        totalCount: cart.totalCount,
-        totalPrice: cart.totalPrice
-    }))
-
+    const {totalCount, totalPrice} = useSelector(({cart}) => cart)
     return  (
         <header className="header">
                 <div className="container">
@@ -24,7 +20,10 @@ const Header = ({logo}) => {
                     </Link>
                     <div className="header__cart">
                         <Link to={'/cart'}>
-                            <Button className="button--cart">
+                            <Button
+                                className="button--cart"
+                                btn
+                            >
                                 <span>{totalPrice} ₽</span>
                                 <div className="button__delimiter"></div>
                                 <svg

@@ -7,7 +7,10 @@
             "sizes": [26, 30, 40],
             "price": 803,
             "category": 0,
-            "rating": 4
+            "rating": 4,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 1,
@@ -17,7 +20,10 @@
             "sizes": [26, 40],
             "price": 245,
             "category": 1,
-            "rating": 6
+            "rating": 6,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 2,
@@ -27,7 +33,10 @@
             "sizes": [26, 40],
             "price": 295,
             "category": 1,
-            "rating": 4
+            "rating": 4,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 3,
@@ -37,7 +46,10 @@
             "sizes": [26, 30, 40],
             "price": 275,
             "category": 2,
-            "rating": 2
+            "rating": 2,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 4,
@@ -47,7 +59,10 @@
             "sizes": [26, 30, 40],
             "price": 415,
             "category": 3,
-            "rating": 8
+            "rating": 8,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 5,
@@ -57,7 +72,10 @@
             "sizes": [30, 40],
             "price": 580,
             "category": 2,
-            "rating": 2
+            "rating": 2,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 6,
@@ -67,7 +85,10 @@
             "sizes": [26, 30, 40],
             "price": 675,
             "category": 1,
-            "rating": 9
+            "rating": 9,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 7,
@@ -77,7 +98,10 @@
             "sizes": [26, 30, 40],
             "price": 450,
             "category": 4,
-            "rating": 10
+            "rating": 10,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 8,
@@ -87,7 +111,10 @@
             "sizes": [26, 30, 40],
             "price": 395,
             "category": 4,
-            "rating": 10
+            "rating": 10,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         },
         {
             "id": 9,
@@ -97,7 +124,10 @@
             "sizes": [26, 30, 40],
             "price": 285,
             "category": 4,
-            "rating": 7
+            "rating": 7,
+            "priceType": 20,
+            "priceSize30": 100,
+            "priceSize40": 250
         }
     ]
 }

@@ -1,44 +1,38 @@
 import React, {useCallback} from 'react'
-import { Categories, Sort, PizzaBlock } from '../components'
+import { Categories, Sort, PizzaBlock, PizzaLoading } from '../components'
 import {useDispatch, useSelector} from "react-redux";
 import {set_category, set_sort_by} from "../redux/actions/filters";
 import {fetchData} from "../redux/actions/data";
-import PizzaLoading from "../components/PizzaBlock/PizzaLoading";
 import {add_data_to_cart} from "../redux/actions/cart";
 
 const categoriesName = ['Мясные','Вегетарианская','Гриль','Острые','Закрытые']
 const sortItems = [
         {name: 'популярности', type: 'rating', order: 'desc'},
-        {name: 'цене', type: 'price', order: 'desc'},
+        {name: 'цене', type: 'price', order: 'asc'},
         {name: 'алфавиту', type: 'name', order: 'asc'}
     ]
-
-export default function Home() {
+export default React.memo(function Home() {
     const dispatch = useDispatch()
     const data = useSelector(({ data }) => data)
+    const cart = useSelector(({ cart }) => cart)
 
-    const filter  = useSelector(({ filter }) => ({
-        category: filter.category,
-        sortBy: filter.sortBy
-    }))
+    const {category, sortBy}  = useSelector(({ filter }) => filter)
 
     React.useEffect(() => {
-        dispatch(fetchData(filter.category, sortItems[filter.sortBy]))
-    }, [filter.category,filter.sortBy])
+        dispatch(fetchData(category, sortItems[sortBy]))
+    }, [category, sortBy])
 
     const onSelectedCategory = useCallback((index) => {
         dispatch(set_category(index))
-    }, [filter.category])
+    }, [])
 
     const onSelectedSort = useCallback((name) => {
         dispatch(set_sort_by(name))
-    }, [filter.sortBy])
+    }, [])
 
-    const cart = useSelector(({ cart }) => cart)
-
-    const onClickToBtnCart = (dataInfo) => {
+    const onClickToBtnCart = useCallback((dataInfo) => {
         dispatch(add_data_to_cart(dataInfo))
-    }
+    }, [])
 
 
 
@@ -46,12 +40,12 @@ export default function Home() {
         <div className="container">
             <div className="content__top">
                 <Categories
-                    category={filter.category}
+                    category={category}
                     list={categoriesName}
                     onClickItem={onSelectedCategory}
                 />
                 <Sort
-                    sortBy={filter.sortBy}
+                    sortBy={sortBy}
                     sortItems={sortItems}
                     onClickItem={onSelectedSort}
                 />
@@ -71,4 +65,4 @@ export default function Home() {
             </div>
         </div>
     )
-}
+})

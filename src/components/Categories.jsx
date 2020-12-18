@@ -1,21 +1,18 @@
 import React from 'react'
 import PropTypes from "prop-types";
 const Categories = ({list, onClickItem, category}) => {
-    const changeActive = index => {
-        onClickItem(index)
-    }
     return (
         <div className="categories">
             <ul>
                 <li
-                    onClick={() => {changeActive(null)}}
+                    onClick={() => {onClickItem(null)}}
                     className={category === null ? "active" : ''}
                 >Все</li>
                 {list && list.map((name, i) =>
                     <li
                         className= {category === i ? "active" : ''}
                         key={`${name}_${i}`}
-                        onClick={() => changeActive(i)}
+                        onClick={() => onClickItem(i)}
                     >
                         {name}
                     </li>)

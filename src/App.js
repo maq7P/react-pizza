@@ -21,4 +21,4 @@ function App() {
         </Router>
     );
 }
-export default App;
+export default React.memo(App);

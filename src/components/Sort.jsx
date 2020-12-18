@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react'
 import PropTypes from "prop-types";
-import PizzaBlock from "./PizzaBlock/PizzaBlock";
 
 function Sort({sortItems, sortBy, onClickItem}) {
     const [visiblePopup, setVisiblePopup] = useState(false)

@@ -13,7 +13,6 @@ const Button = ({btn=false,
                     ? () => {onClickToBtn()}
                     : null
             }
-            href="/cart.html" 
             className = {
                 classNames(className,
                 {

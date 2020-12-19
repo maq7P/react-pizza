@@ -2,10 +2,9 @@
 
 ## Stack:
 * ReactJS + хуки
-* React Router
 * Redux
+* React Router / React Redux / React skeleton
 * Redux thunk
 * json-server
-* Axios
 * classnames
 

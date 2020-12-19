@@ -61,14 +61,18 @@ export const cartReducer = (state = initialState, action) => {
             }
         }
         case DEL_ITEM: {
-            let newStateItems =  {...state.items}
-            delete newStateItems[action.data.id]
+            const id = action.data.id
+            let newStateItems =  {...state.items[id]}
+            delete newStateItems[action.data.type]
             if(!Object.keys(newStateItems).length){
                 newStateItems = {}
             }
             return {
                 // ...state,
-                items: newStateItems,
+                items:{
+                    ...state.items,
+                    [id]: newStateItems
+                },
                 totalCount: state.totalCount - action.data.length,
                 totalPrice: state.totalPrice - (action.data.item.price * action.data.length)
             }

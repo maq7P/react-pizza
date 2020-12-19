@@ -3,7 +3,6 @@ import { CartItem, CartEmpty } from '../components'
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {add_item_such_type, del_all, del_item, del_item_such_type} from "../redux/actions/cart";
-import cartEmptyImage from '../assets/img/empty-cart.png';
 export default function Cart() {
     const cart  = useSelector(({ cart }) => cart)
     const dispatch = useDispatch()
@@ -23,7 +22,7 @@ export default function Cart() {
     const onDelItem = (data) => {
         if(data.length === 1){
             if (window.confirm('Вы уверены, что хотите удалить этот товар?')){
-                console.log('да')
+                dispatch(del_item(data))
             }
         } else{
             dispatch(del_item_such_type(data))
@@ -94,21 +93,8 @@ export default function Cart() {
                     </div>
                 </div>
             </div>
-            :
-                <div className="cart cart--empty">
-                    <h2>
-                        Корзина пустая <i>😕</i>
-                    </h2>
-                    <p>
-                        Вероятней всего, вы не заказывали ещё пиццу.
-                        <br />
-                        Для того, чтобы заказать пиццу, перейди на главную страницу.
-                    </p>
-                    <img src={cartEmptyImage} alt="Empty cart" />
-                    <Link to="/" className="button button--black">
-                        <span>Вернуться назад</span>
-                    </Link>
-                </div>
+
+            : <CartEmpty/>
             }
         </div>
     )
